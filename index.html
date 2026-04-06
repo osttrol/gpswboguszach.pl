@@ -1,31 +1,110 @@
 <!DOCTYPE html>
 <html>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
 <head>
   <meta charset="UTF-8">
   <title>Ślub w Boguszach</title>
+
+  <!-- Fonty -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #FDECEF;
+      font-family: 'Open Sans', sans-serif;
+      color: #333333;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: #B76E79;
+      font-size: 48px;
+      margin-top: 40px;
+    }
+
+    .hero img {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 20px;
+      margin: 20px 0;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      width: 250px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+      color: #B76E79;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .section-image img {
+      width: 70%;
+      max-width: 500px;
+      border-radius: 20px;
+      margin: 40px 0;
+    }
+  </style>
 </head>
+
 <body>
+
   <h1>Ślub w Boguszach</h1>
-  <p>Data: 8 sierpnia 2026</p>
-  <p>Miejsce: Bogusze</p>
+
+  <div class="hero">
+    <img src="zdjecie1.jpg" alt="Para młoda">
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>📅 Data</h2>
+      <p>15 czerwca 2026</p>
+    </div>
+
+    <div class="card">
+      <h2>📍 Miejsce</h2>
+      <p>Boguszach</p>
+    </div>
+
+    <div class="card">
+      <h2>🛏 Nocleg</h2>
+      <p>Informacje wkrótce</p>
+    </div>
+
+    <div class="card">
+      <h2>🎁 Prezenty</h2>
+      <p>Zamiast kwiatów...</p>
+    </div>
+  </div>
+
+  <div class="section-image">
+    <img src="zdjecie2.jpg" alt="Zdjęcie">
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>⏰ Harmonogram</h2>
+      <p>16:00 – ceremonia<br>18:00 – wesele</p>
+    </div>
+
+    <div class="card">
+      <h2>👗 Dress code</h2>
+      <p>Elegancki</p>
+    </div>
+  </div>
+
 </body>
 </html>
-<style>
-  body {
-    background-color: #FDECEF;
-    font-family: 'Open Sans', sans-serif;
-    color: #333333;
-    text-align: center;
-    padding: 40px;
-  }
-   h1, h2 {
-    font-family: 'Playfair Display', serif;
-    color: #B76E79;
-    font-size: 48px;
-    margin-bottom: 20px;
-  }
-  p {
-  font-size: 18px;
-  }
-</style>
