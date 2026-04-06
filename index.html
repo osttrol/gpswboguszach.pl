@@ -237,15 +237,23 @@
         padding-top: 24px;
       }
 
+      .hero h1 {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+        margin-bottom: 18px;
+        text-align: center;
+      }
+
       .hero-image {
-        height: calc(100vh - 110px);
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
+        height: calc(100vh - 100px);
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+        background-position: 72% center;
       }
 
       .cards-screen,
       .full-photo {
         background-attachment: scroll;
+        padding: 40px 16px;
       }
 
       .content {
@@ -260,14 +268,47 @@
 
       .section-title {
         text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
       }
 
       .cards-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
 
       .card {
-        text-align: left;
+        padding: 18px 16px;
+        border-radius: 18px;
+      }
+
+      .card h2 {
+        font-size: 1.15rem;
+      }
+
+      .card p {
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+
+      .card-header {
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .bg1,
+      .hero-image {
+        background-position: 72% center;
+      }
+
+      .bg2,
+      .photo2 {
+        background-position: 70% center;
       }
     }
   </style>
