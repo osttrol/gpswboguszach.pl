@@ -16,6 +16,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
     }
 
     body {
@@ -23,14 +24,20 @@
       background-color: #FDECEF;
       color: #333333;
       line-height: 1.6;
+      overflow-y: scroll;
     }
 
     h1, h2 {
       font-family: 'Playfair Display', serif;
     }
 
+    section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
     .hero {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -44,6 +51,7 @@
       color: #B76E79;
       margin-bottom: 30px;
       text-align: center;
+      animation: fadeDown 1s ease;
     }
 
     .hero-image {
@@ -54,9 +62,10 @@
       background-position: center;
       border-top-left-radius: 28px;
       border-top-right-radius: 28px;
+      animation: fadeIn 1.2s ease;
     }
 
-    .photo-section {
+    .cards-screen {
       min-height: 100vh;
       position: relative;
       background-size: cover;
@@ -66,13 +75,14 @@
       align-items: center;
       justify-content: center;
       padding: 80px 20px;
+      overflow: hidden;
     }
 
-    .photo-section::before {
+    .cards-screen::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.22);
     }
 
     .content {
@@ -87,9 +97,9 @@
       margin-bottom: 36px;
       color: #B76E79;
       font-size: clamp(2rem, 4vw, 3rem);
-      transform: translateY(40px);
       opacity: 0;
-      transition: all 0.8s ease;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
 
     .cards-grid {
@@ -105,9 +115,11 @@
       padding: 28px 22px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
       text-align: center;
-      transform: translateY(40px);
       opacity: 0;
-      transition: all 0.8s ease;
+      transform: translateY(45px) scale(0.98);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
     }
 
     .card h2 {
@@ -121,7 +133,7 @@
     }
 
     .full-photo {
-      min-height: 100vh;
+      height: 100vh;
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -139,9 +151,36 @@
       background-image: url('slub-bogusze-2.jpg');
     }
 
-    .show {
-      transform: translateY(0);
+    .show-title {
       opacity: 1;
+      transform: translateY(0);
+    }
+
+    .show-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(1.02);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 768px) {
@@ -155,7 +194,7 @@
         border-top-right-radius: 20px;
       }
 
-      .photo-section,
+      .cards-screen,
       .full-photo {
         background-attachment: scroll;
       }
@@ -169,23 +208,23 @@
     <div class="hero-image"></div>
   </section>
 
-  <section class="photo-section bg1">
+  <section class="cards-screen bg1 info-section">
     <div class="content">
-      <h2 class="section-title reveal">Najważniejsze informacje</h2>
+      <h2 class="section-title">Najważniejsze informacje</h2>
       <div class="cards-grid">
-        <div class="card reveal">
+        <div class="card">
           <h2>📅 Data</h2>
           <p>15 czerwca 2026</p>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <h2>📍 Miejsce</h2>
-          <p>Boguszach</p>
+          <p>Bogusze</p>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <h2>⛪ Ceremonia</h2>
           <p>Kościół parafialny, godz. 16:00</p>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <h2>🎉 Przyjęcie</h2>
           <p>Sala weselna po ceremonii</p>
         </div>
@@ -195,23 +234,23 @@
 
   <section class="full-photo photo2"></section>
 
-  <section class="photo-section bg2">
+  <section class="cards-screen bg2 info-section">
     <div class="content">
-      <h2 class="section-title reveal">Dodatkowe informacje</h2>
+      <h2 class="section-title">Dodatkowe informacje</h2>
       <div class="cards-grid">
-        <div class="card reveal">
+        <div class="card">
           <h2>🛏 Nocleg</h2>
           <p>Informacje o noclegach podamy wkrótce.</p>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <h2>👗 Dress code</h2>
           <p>Elegancki, w jasnych kolorach.</p>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <h2>🎁 Prezenty</h2>
           <p>Zamiast kwiatów mile widziane...</p>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <h2>📞 Kontakt</h2>
           <p>W razie pytań skontaktuj się z nami.</p>
         </div>
@@ -220,19 +259,31 @@
   </section>
 
   <script>
-    const elements = document.querySelectorAll('.reveal');
+    const sections = document.querySelectorAll('.info-section');
 
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
+        if (!entry.isIntersecting) return;
+
+        const section = entry.target;
+        const title = section.querySelector('.section-title');
+        const cards = section.querySelectorAll('.card');
+
+        title.classList.add('show-title');
+
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('show-card');
+          }, 250 + index * 180);
+        });
+
+        obs.unobserve(section);
       });
     }, {
-      threshold: 0.2
+      threshold: 0.55
     });
 
-    elements.forEach(el => observer.observe(el));
+    sections.forEach(section => observer.observe(section));
   </script>
 
 </body>
