@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ślub w Boguszach</title>
+  <title>¡Ula i Daniel biorą ślub!</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
@@ -133,7 +133,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.4rem, 5vw, 4rem);
       color: #B76E79;
       margin-bottom: 30px;
       text-align: center;
@@ -142,6 +142,7 @@
       transition:
         opacity 1s ease,
         transform 1s ease;
+      padding: 0 16px;
     }
 
     body.hero-title-visible .hero h1 {
@@ -160,8 +161,8 @@
       animation: fadeIn 1.2s ease;
     }
 
-    /* SEKCJE */
-    .cards-screen {
+    /* WSPÓLNE DLA SEKCJI */
+    .section-screen {
       min-height: 100vh;
       position: relative;
       background-size: cover;
@@ -174,18 +175,87 @@
       overflow: hidden;
     }
 
-    .cards-screen::before {
+    .section-screen::before {
       content: "";
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.18);
     }
 
-    .content {
+    .section-content {
       position: relative;
       z-index: 1;
       width: 100%;
       max-width: 1400px;
+    }
+
+    .section-title {
+      color: #ffffff;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 36px;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .show-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SEKCJA O NAS */
+    .story-screen {
+      background-image: url('slub-bogusze-1.jpg');
+    }
+
+    .story-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .story-card {
+      background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1mm solid rgba(255, 255, 255, 0.85);
+      border-radius: 28px;
+      padding: 34px 34px;
+      color: #ffffff;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+      opacity: 0;
+      transform: translateY(45px) scale(0.98);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      background: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .story-card p {
+      font-size: 1.1rem;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      margin-bottom: 18px;
+    }
+
+    .story-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* SEKCJA KIEDY I GDZIE */
+    .info-screen {
+      background-image: url('slub-bogusze-2.jpg');
+    }
+
+    .info-layout {
       display: flex;
       justify-content: flex-start;
     }
@@ -194,17 +264,6 @@
       width: 50%;
       max-width: 620px;
       padding-left: 2vw;
-    }
-
-    .section-title {
-      text-align: left;
-      margin-bottom: 36px;
-      color: #ffffff;
-      font-size: clamp(2rem, 4vw, 3rem);
-      opacity: 0;
-      transform: translateY(35px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
     }
 
     .cards-grid {
@@ -221,6 +280,7 @@
       border-radius: 24px;
       padding: 26px 22px;
       text-align: left;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
       opacity: 0;
       transform: translateY(45px) scale(0.98);
       transition:
@@ -228,13 +288,17 @@
         transform 0.8s ease,
         background 0.35s ease,
         box-shadow 0.35s ease;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
     }
 
     .card:hover {
       transform: translateY(-8px) scale(1.01);
       background: rgba(255, 255, 255, 0.15);
       box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .show-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
     .card-header {
@@ -269,35 +333,6 @@
       font-size: 1rem;
       color: #ffffff;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-    }
-
-    .full-photo {
-      height: 100vh;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-
-    .bg1 {
-      background-image: url('slub-bogusze-1.jpg');
-    }
-
-    .bg2 {
-      background-image: url('slub-bogusze-2.jpg');
-    }
-
-    .photo2 {
-      background-image: url('slub-bogusze-2.jpg');
-    }
-
-    .show-title {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .show-card {
-      opacity: 1;
-      transform: translateY(0) scale(1);
     }
 
     /* STRZAŁKA */
@@ -391,7 +426,6 @@
       .hero h1 {
         font-size: clamp(2rem, 8vw, 2.8rem);
         margin-bottom: 18px;
-        text-align: center;
       }
 
       .hero-image {
@@ -401,13 +435,27 @@
         background-position: 72% center;
       }
 
-      .cards-screen,
-      .full-photo {
+      .section-screen {
         background-attachment: scroll;
         padding: 40px 16px;
       }
 
-      .content {
+      .section-title {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .story-card {
+        padding: 24px 20px;
+        border-radius: 22px;
+      }
+
+      .story-card p {
+        font-size: 0.98rem;
+      }
+
+      .info-layout {
         justify-content: center;
       }
 
@@ -415,12 +463,6 @@
         width: 100%;
         max-width: 100%;
         padding-left: 0;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 1.8rem;
-        margin-bottom: 20px;
       }
 
       .cards-grid {
@@ -452,13 +494,12 @@
         height: 20px;
       }
 
-      .bg1,
+      .story-screen,
       .hero-image {
         background-position: 72% center;
       }
 
-      .bg2,
-      .photo2 {
+      .info-screen {
         background-position: 70% center;
       }
 
@@ -484,13 +525,35 @@
     <div class="hero-image"></div>
   </section>
 
-  <section class="cards-screen bg1 info-section">
-    <div class="content">
+  <section class="section-screen story-screen reveal-section">
+    <div class="section-content">
+      <div class="story-wrap">
+        <h2 class="section-title">Jak to się zaczęło?</h2>
+
+        <div class="story-card reveal-item">
+          <p>
+            Jak to się stało, że udawany Hiszpan z Prostek oraz absolwentka fennistyki z Warszawy trafili na siebie?
+            Ano spotkaliśmy się w Chórze Akademickim Uniwersytetu Warszawskiego, gdzie połączyło nas wspólne zamiłowanie do muzyki.
+          </p>
+          <p>
+            Jakimś niepojętym sposobem dogadaliśmy się i z czasem wspólne chwile przerodziły się w coś tak wyjątkowego,
+            że chcemy oficjalnie się chajtnąć.
+          </p>
+          <p>
+            Z radością zapraszamy Was do świętowania naszego ślubu razem z nami.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-screen info-screen reveal-section">
+    <div class="section-content info-layout">
       <div class="left-column">
         <h2 class="section-title">Kiedy to? Gdzie to?</h2>
 
         <div class="cards-grid">
-          <div class="card">
+          <div class="card reveal-item">
             <div class="card-header">
               <span class="icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -500,12 +563,25 @@
                   <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
               </span>
-              <h2>Data</h2>
+              <h2>Kiedy?</h2>
             </div>
             <p>8 sierpnia 2026</p>
           </div>
 
-          <div class="card">
+          <div class="card reveal-item">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M12 7v5l3 2"></path>
+                </svg>
+              </span>
+              <h2>O której?</h2>
+            </div>
+            <p>16:00</p>
+          </div>
+
+          <div class="card reveal-item">
             <div class="card-header">
               <span class="icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -513,106 +589,22 @@
                   <circle cx="12" cy="10" r="2.5"></circle>
                 </svg>
               </span>
-              <h2>Miejsce</h2>
+              <h2>Gdzie?</h2>
             </div>
             <p>Ośrodek Szych w Boguszach</p>
           </div>
 
-          <div class="card">
+          <div class="card reveal-item">
             <div class="card-header">
               <span class="icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 20h16"></path>
-                  <path d="M6 20V9l6-4 6 4v11"></path>
-                  <path d="M9.5 20v-5h5v5"></path>
-                  <path d="M10 11h4"></path>
+                  <path d="M3 18l6-6 4 4 7-8"></path>
+                  <path d="M14 8h6v6"></path>
                 </svg>
               </span>
-              <h2>Ceremonia</h2>
+              <h2>Jak dojechać?</h2>
             </div>
-            <p>Plaża przy Jeziorze Toczyłowskim, godz. 16:00</p>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 20h16"></path>
-                  <path d="M7 20v-6"></path>
-                  <path d="M12 20v-9"></path>
-                  <path d="M17 20v-4"></path>
-                  <path d="M5 8c2-2 4-2 6 0s4 2 8-1"></path>
-                </svg>
-              </span>
-              <h2>Impreza</h2>
-            </div>
-            <p>Sala weselna obok plaży</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="full-photo photo2"></section>
-
-  <section class="cards-screen bg2 info-section">
-    <div class="content">
-      <div class="left-column">
-        <h2 class="section-title">Dodatkowe informacje</h2>
-
-        <div class="cards-grid">
-          <div class="card">
-            <div class="card-header">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 7h18v10H3z"></path>
-                  <path d="M7 7v10"></path>
-                  <path d="M17 7v10"></path>
-                  <path d="M3 12h18"></path>
-                </svg>
-              </span>
-              <h2>Nocleg</h2>
-            </div>
-            <p>Informacje o noclegach podamy wkrótce.</p>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3c2.5 3 5 4.5 8 5-1 6-4.5 10.5-8 13-3.5-2.5-7-7-8-13 3-.5 5.5-2 8-5z"></path>
-                </svg>
-              </span>
-              <h2>Dress code</h2>
-            </div>
-            <p>Elegancki, w jasnych kolorach.</p>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7"></path>
-                  <path d="M12 20V9"></path>
-                  <path d="M8 12l4-4 4 4"></path>
-                  <rect x="5" y="4" width="14" height="4" rx="1"></rect>
-                </svg>
-              </span>
-              <h2>Prezenty</h2>
-            </div>
-            <p>Zamiast kwiatów mile widziane...</p>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 16.5v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.8 19.8 0 0 1 2.1 3.8 2 2 0 0 1 4.1 1.6h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.8 2.6a2 2 0 0 1-.5 2.2L8.1 9.4a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 2.2-.5c.8.4 1.7.7 2.6.8a2 2 0 0 1 1.3 1.6z"></path>
-                </svg>
-              </span>
-              <h2>Kontakt</h2>
-            </div>
-            <p>W razie pytań skontaktuj się z nami.</p>
+            <p>Szczegóły dojazdu znajdziecie tutaj.</p>
           </div>
         </div>
       </div>
@@ -627,7 +619,7 @@
   </button>
 
   <script>
-    const sections = document.querySelectorAll('.info-section');
+    const sections = document.querySelectorAll('.reveal-section');
     const introOverlay = document.getElementById('introOverlay');
     const backToTop = document.getElementById('backToTop');
 
@@ -700,20 +692,20 @@
 
         const section = entry.target;
         const title = section.querySelector('.section-title');
-        const cards = section.querySelectorAll('.card');
+        const items = section.querySelectorAll('.reveal-item');
 
         title.classList.add('show-title');
 
-        cards.forEach((card, index) => {
+        items.forEach((item, index) => {
           setTimeout(() => {
-            card.classList.add('show-card');
+            item.classList.add('show-card');
           }, 250 + index * 180);
         });
 
         obs.unobserve(section);
       });
     }, {
-      threshold: 0.55
+      threshold: 0.45
     });
 
     sections.forEach(section => observer.observe(section));
