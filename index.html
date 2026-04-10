@@ -372,11 +372,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
       gap: 20px;
     }
 
     .rsvp-card {
       width: min(720px, 100%);
+      margin: 0 auto;
       background: rgba(253, 236, 239, 0.88);
       backdrop-filter: blur(7px);
       -webkit-backdrop-filter: blur(7px);
@@ -739,7 +741,7 @@
     <div class="section-content guests-content">
       <div class="guests-wrap">
 
-        <div class="rsvp-card reveal-item">
+        <div class="rsvp-card reveal-item show-card">
           <div class="card-header card-header-center">
             <span class="icon">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -897,7 +899,9 @@
         const title = section.querySelector('.section-title');
         const items = section.querySelectorAll('.reveal-item');
 
-        title.classList.add('show-title');
+        if (title) {
+          title.classList.add('show-title');
+        }
 
         items.forEach((item, index) => {
           setTimeout(() => {
