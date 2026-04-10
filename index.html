@@ -890,7 +890,9 @@
         const title = section.querySelector('.section-title');
         const items = section.querySelectorAll('.reveal-item');
 
-        title.classList.add('show-title');
+        if (title) {
+          title.classList.add('show-title');
+        }
 
         items.forEach((item, index) => {
           setTimeout(() => {
