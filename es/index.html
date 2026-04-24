@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Ula i Daniel biorą ślub!</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #FDECEF;
+      color: #333333;
+      line-height: 1.6;
+      overflow-y: scroll;
+    }
+
+    body.intro-active {
+      overflow: hidden;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    /* PREMIUM INTRO */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 32%, rgba(255,255,255,0) 58%),
+        linear-gradient(180deg, #FDECEF 0%, #f9e6eb 45%, #f5dfe6 100%);
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity 1.2s ease,
+        visibility 0s linear 1.2s;
+    }
+
+    .intro-overlay::before {
+      content: "";
+      position: absolute;
+      width: 68vmax;
+      height: 68vmax;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0) 70%);
+      filter: blur(14px);
+      animation: haloPulse 3.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .intro-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(1);
+      opacity: 1;
+      filter: blur(0);
+      transition:
+        transform 1.45s cubic-bezier(0.16, 0.8, 0.2, 1),
+        opacity 1.15s ease,
+        filter 1.15s ease;
+      will-change: transform, opacity, filter;
+    }
+
+    .intro-stage::before {
+      content: "";
+      position: absolute;
+      inset: -8% -10%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.40) 0%, rgba(255,255,255,0.18) 38%, rgba(255,255,255,0) 72%);
+      filter: blur(10px);
+      opacity: 0.95;
+      animation: softBreath 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .intro-logo {
+      position: relative;
+      width: min(62vw, 460px);
+      max-width: 84vw;
+      display: block;
+      filter:
+        drop-shadow(0 10px 26px rgba(183, 110, 121, 0.22))
+        drop-shadow(0 2px 10px rgba(255,255,255,0.36));
+      animation: logoFloat 3s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    .intro-overlay.zoom .intro-stage {
+      transform: scale(18);
+      opacity: 0;
+      filter: blur(12px);
+    }
+
+    .intro-overlay.zoom {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 40px;
+      background-color: #FDECEF;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: #B76E79;
+      margin-bottom: 30px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 1s ease,
+        transform 1s ease;
+      padding: 0 16px;
+    }
+
+    body.hero-title-visible .hero h1 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-image {
+      width: 100%;
+      height: calc(100vh - 140px);
+      background-image: url('slub-bogusze-1.jpg');
+      background-size: cover;
+      background-position: center;
+      border-top-left-radius: 28px;
+      border-top-right-radius: 28px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    /* WSPÓLNE DLA SEKCJI */
+    .section-screen {
+      min-height: 100vh;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      overflow: hidden;
+    }
+
+    .section-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1400px;
+    }
+
+    .section-title {
+      display: inline-block;
+      width: fit-content;
+      color: #B76E79;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 36px;
+      padding: 12px 22px;
+      background: rgba(253, 236, 239, 0.68);
+      border: 1px solid rgba(183, 110, 121, 0.26);
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      text-shadow: none;
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .story-wrap .section-title,
+    .left-column .section-title {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .show-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SEKCJA O NAS */
+    .story-screen {
+      background-image: url('slub-bogusze-1.jpg');
+    }
+
+    .story-wrap {
+      max-width: 860px;
+      margin: 0;
+      text-align: left;
+    }
+
+    .story-card {
+      background: rgba(253, 236, 239, 0.76);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(183, 110, 121, 0.35);
+      border-radius: 28px;
+      padding: 34px 34px;
+      color: #4A3A3A;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+      opacity: 0;
+      transform: translateY(45px) scale(0.98);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      background: rgba(253, 236, 239, 0.84);
+      border-color: rgba(183, 110, 121, 0.48);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .story-card p {
+      font-size: 1.1rem;
+      color: #4A3A3A;
+      text-shadow: none;
+      margin-bottom: 18px;
+    }
+
+    .story-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* SEKCJA KIEDY I GDZIE */
+    .info-screen {
+      background-image: url('slub-bogusze-2.jpg');
+    }
+
+    .info-layout {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .left-column {
+      width: 50%;
+      max-width: 620px;
+      padding-right: 2vw;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(253, 236, 239, 0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(183, 110, 121, 0.35);
+      border-radius: 24px;
+      padding: 26px 22px;
+      text-align: left;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+      opacity: 0;
+      transform: translateY(45px) scale(0.98);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.01);
+      background: rgba(253, 236, 239, 0.90);
+      border-color: rgba(183, 110, 121, 0.48);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .show-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: #B76E79;
+    }
+
+    .icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      stroke: currentColor;
+    }
+
+    .card h2 {
+      color: #B76E79;
+      margin: 0;
+      font-size: 1.4rem;
+      text-shadow: none;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #4A3A3A;
+      text-shadow: none;
+    }
+
+
+    /* SEKCJA DLA GOŚCI */
+    .guests-screen {
+      background-image: url('slub-bogusze-3.jpg');
+      align-items: center;
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    .guests-content {
+      max-width: 1320px;
+    }
+
+    .guests-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+    }
+
+    .rsvp-card {
+      width: min(560px, 100%);
+      margin: 0 auto 6px;
+      background: rgba(253, 236, 239, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(183, 110, 121, 0.48);
+      border-radius: 42px;
+      padding: 30px 34px;
+      text-align: center;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
+      opacity: 0;
+      transform: translateY(45px) scale(0.98);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .rsvp-card.show-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .rsvp-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      background: rgba(253, 236, 239, 0.96);
+      border-color: rgba(183, 110, 121, 0.56);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .rsvp-card h2 {
+      color: #B76E79;
+      margin: 0;
+      font-size: 2rem;
+      text-shadow: none;
+    }
+
+    .rsvp-card p {
+      color: #4A3A3A;
+      font-size: 1.08rem;
+      text-shadow: none;
+      margin-top: 8px;
+    }
+
+    .card-header-center {
+      justify-content: center;
+    }
+
+    .guests-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .guests-grid .card {
+      min-height: 196px;
+      padding: 20px 18px;
+    }
+
+    .guests-grid .card h2 {
+      font-size: 1.18rem;
+    }
+
+    .guests-grid .card p {
+      font-size: 0.95rem;
+      line-height: 1.42;
+    }
+    .card-link,
+    .rsvp-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    }
+
+    .card-link:hover h2,
+    .card-link:hover p,
+    .rsvp-card-link:hover h2,
+    .rsvp-card-link:hover p {
+     color: inherit;
+}
+
+    /* STRZAŁKA */
+    .back-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2000;
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(183, 110, 121, 0.38);
+      border-radius: 999px;
+      background: rgba(253, 236, 239, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #B76E79;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition:
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .back-to-top svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
+    .back-to-top:hover {
+      background: rgba(253, 236, 239, 0.86);
+      border-color: rgba(183, 110, 121, 0.5);
+    }
+
+    .back-to-top.show-arrow {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(1.02);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes logoFloat {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-4px) scale(1.015); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes haloPulse {
+      0% { transform: scale(0.96); opacity: 0.75; }
+      50% { transform: scale(1.03); opacity: 1; }
+      100% { transform: scale(0.96); opacity: 0.75; }
+    }
+
+    @keyframes softBreath {
+      0% { transform: scale(0.98); opacity: 0.72; }
+      50% { transform: scale(1.04); opacity: 1; }
+      100% { transform: scale(0.98); opacity: 0.72; }
+    }
+
+    @media (max-width: 1100px) {
+      .left-column {
+        width: 62%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .intro-logo {
+        width: min(80vw, 340px);
+      }
+
+      .hero {
+        padding-top: 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+        margin-bottom: 18px;
+      }
+
+      .hero-image {
+        height: calc(100vh - 100px);
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+        background-position: 72% center;
+      }
+
+      .section-screen {
+        background-attachment: scroll;
+        padding: 40px 16px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        padding: 10px 18px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .story-card {
+        padding: 24px 20px;
+        border-radius: 22px;
+      }
+
+      .story-card p {
+        font-size: 0.98rem;
+      }
+
+      .info-layout {
+        justify-content: center;
+      }
+
+      .left-column {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .card {
+        padding: 18px 16px;
+        border-radius: 18px;
+      }
+
+      .card h2 {
+        font-size: 1.15rem;
+      }
+
+      .card p {
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+
+      .card-header {
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .story-screen {
+        background-position: left center;
+      }
+      .hero-image {
+        background-position: 72% center;
+      }
+
+      .info-screen {
+        background-position: 70% center;
+      }
+
+
+      .guests-screen {
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+
+      .rsvp-card {
+        width: 100%;
+        padding: 24px 20px;
+        border-radius: 28px;
+      }
+
+      .rsvp-card h2 {
+        font-size: 1.55rem;
+      }
+
+      .rsvp-card p {
+        font-size: 0.98rem;
+      }
+
+      .guests-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .guests-grid .card {
+        min-height: 0;
+        padding: 18px 16px;
+      }
+
+      .back-to-top {
+        width: 50px;
+        height: 50px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+<body class="intro-active">
+
+  <div class="intro-overlay" id="introOverlay">
+    <div class="intro-stage">
+      <img src="logo-slubne.png" alt="Logo ślubne" class="intro-logo">
+    </div>
+  </div>
+
+  <section class="hero" id="top">
+    <h1>¡Ula i Daniel biorą ślub!</h1>
+    <div class="hero-image"></div>
+  </section>
+
+  <section class="section-screen story-screen reveal-section">
+    <div class="section-content">
+      <div class="story-wrap">
+        <h2 class="section-title">Jak to się zaczęło?</h2>
+
+        <div class="story-card reveal-item">
+          <p>
+            Jak to się stało, że udawany Hiszpan z Prostek oraz absolwentka fennistyki z Warszawy trafili na siebie?
+            Ano spotkaliśmy się w Chórze Akademickim Uniwersytetu Warszawskiego, gdzie połączyło nas wspólne zamiłowanie do muzyki.
+          </p>
+          <p>
+            Jakimś niepojętym sposobem dogadaliśmy się i z czasem wspólne chwile przerodziły się w coś tak wyjątkowego,
+            że chcemy oficjalnie się chajtnąć.
+          </p>
+          <p>
+            Z radością zapraszamy Was do świętowania naszego ślubu razem z nami.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-screen info-screen reveal-section">
+    <div class="section-content info-layout">
+      <div class="left-column">
+        <h2 class="section-title">Kiedy to? Gdzie to?</h2>
+
+        <div class="cards-grid">
+          <a href="slub-ula-daniel.ics" class="card reveal-item card-link">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <line x1="16" y1="2.5" x2="16" y2="6"></line>
+                  <line x1="8" y1="2.5" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </span>
+              <h2>Kiedy?</h2>
+            </div>
+            <p>8 sierpnia 2026</p>
+          </a>
+
+          <div class="card reveal-item">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M12 7v5l3 2"></path>
+                </svg>
+              </span>
+              <h2>O której?</h2>
+            </div>
+            <p>16:00</p>
+          </div>
+
+          <a href="https://mazurskiosrodekszych.pl" class="card reveal-item card-link" target="_blank" rel="noopener noreferrer">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 21s6-5.5 6-11a6 6 0 1 0-12 0c0 5.5 6 11 6 11z"></path>
+                  <circle cx="12" cy="10" r="2.5"></circle>
+                </svg>
+              </span>
+              <h2>Gdzie?</h2>
+            </div>
+            <p>Ośrodek Szych w Boguszach</p>
+          </a>
+
+          <a href="https://maps.app.goo.gl/L9RDMQ1pjVVEoNLE9" class="card reveal-item card-link" target="_blank" rel="noopener noreferrer">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 18l6-6 4 4 7-8"></path>
+                  <path d="M14 8h6v6"></path>
+                </svg>
+              </span>
+              <h2>Jak dojechać?</h2>
+            </div>
+            <p>Szczegóły dojazdu znajdziecie tutaj.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-screen guests-screen reveal-section">
+    <div class="section-content guests-content">
+      <div class="guests-wrap">
+
+        <a href="https://forms.office.com/r/K6iQ3Lp1F9" class="rsvp-card rsvp-card-link reveal-item show-card" target="_blank" rel="noopener noreferrer">
+          <div class="card-header card-header-center">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M8 12l2.5 2.5L16 9"></path>
+              </svg>
+            </span>
+            <h2>Czy będziesz z nami?</h2>
+          </div>
+          <p>Daj nam znać klikając tutaj --></p>
+        </a>
+
+        <div class="guests-grid">
+          <div class="card reveal-item">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 10h18"></path>
+                  <path d="M5 10v7"></path>
+                  <path d="M19 10v7"></path>
+                  <path d="M5 17h14"></path>
+                  <path d="M7 10V7h10v3"></path>
+                </svg>
+              </span>
+              <h2>Nocleg</h2>
+            </div>
+            <p>Zapewniamy nocleg z soboty na niedzielę. Szczegóły przekażemy mailowo.</p>
+          </div>
+
+          <div class="card reveal-item">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M8 12h8"></path>
+                  <path d="M12 8v8"></path>
+                </svg>
+              </span>
+              <h2>Poprawiny</h2>
+            </div>
+            <p>W niedzielę zapraszamy na wspólny obiad o 12:00.</p>
+          </div>
+
+          <a href="mailto:gpswboguszach@gmail.com" class="card reveal-item card-link">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 6h16v12H4z"></path>
+                  <path d="M4 6l8 6 8-6"></path>
+                </svg>
+              </span>
+              <h2>Kontakt</h2>
+            </div>
+            <p>Jeśli masz pytania — napisz do nas klikając tutaj.</p>
+          </a>
+
+          <div class="card reveal-item">
+            <div class="card-header">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+                  <path d="M8 7V5h8v2"></path>
+                </svg>
+              </span>
+              <h2>Co wziąć ze sobą?</h2>
+            </div>
+            <p>Dobry humor, kostium kąpielowy, klapki, ręcznik, krem z filtrem SPF, spray na komary... i SIEBIE!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <button class="back-to-top" id="backToTop" aria-label="Wróć na górę">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5"></path>
+      <path d="M5 12l7-7 7 7"></path>
+    </svg>
+  </button>
+
+  <script>
+    const sections = document.querySelectorAll('.reveal-section');
+    const introOverlay = document.getElementById('introOverlay');
+    const backToTop = document.getElementById('backToTop');
+
+    function showIntroLogo() {
+      document.body.classList.add('intro-active');
+      document.body.classList.remove('hero-title-visible');
+      introOverlay.classList.remove('zoom');
+      void introOverlay.offsetWidth;
+    }
+
+    function hideIntroWithZoom(delay = 1100) {
+      setTimeout(() => {
+        introOverlay.classList.add('zoom');
+      }, delay);
+
+      setTimeout(() => {
+        document.body.classList.remove('intro-active');
+        document.body.classList.add('hero-title-visible');
+      }, delay + 850);
+    }
+
+    function smoothScrollToTop(duration = 1000) {
+      return new Promise((resolve) => {
+        const start = window.scrollY;
+        const startTime = performance.now();
+
+        function easeInOutCubic(t) {
+          return t < 0.5
+            ? 4 * t * t * t
+            : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function step(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = easeInOutCubic(progress);
+
+          window.scrollTo(0, start * (1 - eased));
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            resolve();
+          }
+        }
+
+        requestAnimationFrame(step);
+      });
+    }
+
+    function playIntroOnLoad() {
+      showIntroLogo();
+      hideIntroWithZoom(1200);
+    }
+
+    async function playIntroBackToTop() {
+      showIntroLogo();
+      await new Promise(resolve => setTimeout(resolve, 280));
+      await smoothScrollToTop(1050);
+      hideIntroWithZoom(220);
+    }
+
+    window.addEventListener('load', () => {
+      playIntroOnLoad();
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const section = entry.target;
+        const title = section.querySelector('.section-title');
+        const items = section.querySelectorAll('.reveal-item');
+
+        if (title) {
+          title.classList.add('show-title');
+        }
+
+        items.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add('show-card');
+          }, 250 + index * 180);
+        });
+
+        obs.unobserve(section);
+      });
+    }, {
+      threshold: 0.45
+    });
+
+    sections.forEach(section => observer.observe(section));
+
+    function toggleBackToTop() {
+      if (window.scrollY > 500) {
+        backToTop.classList.add('show-arrow');
+      } else {
+        backToTop.classList.remove('show-arrow');
+      }
+    }
+
+    window.addEventListener('scroll', toggleBackToTop);
+
+    backToTop.addEventListener('click', async () => {
+      backToTop.classList.remove('show-arrow');
+      await playIntroBackToTop();
+    });
+  </script>
+
+</body>
+</html>
