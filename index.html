@@ -29,10 +29,6 @@
       overflow: hidden;
     }
 
-    h1, h2 {
-      font-family: 'Playfair Display', serif;
-    }
-
     /* INTRO */
     .intro-overlay {
       position: fixed;
@@ -149,22 +145,10 @@
       width: min(34vw, 180px);
       max-width: 180px;
       display: block;
-      margin: 0 auto 22px;
+      margin: 0 auto 28px;
       filter:
         drop-shadow(0 8px 18px rgba(183, 110, 121, 0.16))
         drop-shadow(0 2px 8px rgba(255,255,255,0.28));
-    }
-
-    .language-box h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: #B76E79;
-      margin-bottom: 10px;
-    }
-
-    .language-box p {
-      font-size: 1rem;
-      color: #6A5555;
-      margin-bottom: 28px;
     }
 
     .language-buttons {
@@ -201,19 +185,6 @@
       box-shadow: 0 14px 24px rgba(0, 0, 0, 0.10);
     }
 
-    .language-link span {
-      display: block;
-      line-height: 1.1;
-    }
-
-    .language-link small {
-      display: block;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 0.82rem;
-      color: #7A6767;
-      margin-top: 4px;
-    }
-
     @keyframes logoFloat {
       0% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-4px) scale(1.015); }
@@ -244,15 +215,6 @@
 
       .language-logo {
         width: min(42vw, 150px);
-        margin-bottom: 18px;
-      }
-
-      .language-box h1 {
-        font-size: clamp(1.7rem, 7vw, 2.3rem);
-      }
-
-      .language-box p {
-        font-size: 0.95rem;
         margin-bottom: 22px;
       }
 
@@ -279,24 +241,10 @@
     <div class="language-box">
       <img src="/logo-slubne.png" alt="Logo ślubne" class="language-logo">
 
-      <h1>Wybierz język</h1>
-      <p>Elige idioma · Valitse kieli</p>
-
       <div class="language-buttons">
-        <a href="/pl/" class="language-link">
-          <span>Polski</span>
-          <small>PL</small>
-        </a>
-
-        <a href="/es/" class="language-link">
-          <span>Español</span>
-          <small>ES</small>
-        </a>
-
-        <a href="/fi/" class="language-link">
-          <span>Suomi</span>
-          <small>FI</small>
-        </a>
+        <a href="/pl/" class="language-link">Polski</a>
+        <a href="/es/" class="language-link">Español</a>
+        <a href="/fi/" class="language-link">Suomi</a>
       </div>
     </div>
   </main>
