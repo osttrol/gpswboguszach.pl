@@ -462,6 +462,60 @@
      color: inherit;
 }
 
+
+    /* PRZEŁĄCZNIK JĘZYKA */
+    .language-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      background: rgba(253, 236, 239, 0.82);
+      border: 1px solid rgba(183, 110, 121, 0.32);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+    }
+
+    .language-switcher a,
+    .language-switcher span {
+      min-width: 42px;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 0.92rem;
+      line-height: 1;
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .language-switcher a {
+      color: #8D5C66;
+    }
+
+    .language-switcher a:hover {
+      background: rgba(255, 255, 255, 0.42);
+      color: #B76E79;
+      transform: translateY(-1px);
+    }
+
+    .language-switcher .active-lang {
+      background: rgba(183, 110, 121, 0.16);
+      color: #B76E79;
+      font-weight: 600;
+      cursor: default;
+    }
+
     /* STRZAŁKA */
     .back-to-top {
       position: fixed;
@@ -668,6 +722,22 @@
         padding: 18px 16px;
       }
 
+
+      .language-switcher {
+        top: 14px;
+        right: 14px;
+        padding: 5px;
+        gap: 4px;
+      }
+
+      .language-switcher a,
+      .language-switcher span {
+        min-width: 38px;
+        height: 32px;
+        padding: 0 10px;
+        font-size: 0.84rem;
+      }
+
       .back-to-top {
         width: 50px;
         height: 50px;
@@ -684,6 +754,13 @@
       <img src="logo-slubne.png" alt="Logo ślubne" class="intro-logo">
     </div>
   </div>
+
+
+  <nav class="language-switcher" aria-label="Wybór języka">
+    <span class="active-lang">PL</span>
+    <a href="/es/" lang="es">ES</a>
+    <a href="/fi/" lang="fi">FI</a>
+  </nav>
 
   <section class="hero" id="top">
     <h1>¡Ula i Daniel biorą ślub!</h1>
