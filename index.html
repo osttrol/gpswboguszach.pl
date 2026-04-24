@@ -448,6 +448,19 @@
       font-size: 0.95rem;
       line-height: 1.42;
     }
+    .card-link,
+    .rsvp-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    }
+
+    .card-link:hover h2,
+    .card-link:hover p,
+    .rsvp-card-link:hover h2,
+    .rsvp-card-link:hover p {
+     color: inherit;
+}
 
     /* STRZAŁKA */
     .back-to-top {
@@ -704,8 +717,7 @@
       <div class="left-column">
         <h2 class="section-title">Kiedy to? Gdzie to?</h2>
 
-        <div class="cards-grid">
-          <div class="card reveal-item">
+          <a href="slub-ula-daniel.ics" class="card reveal-item card-link">
             <div class="card-header">
               <span class="icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -718,8 +730,8 @@
               <h2>Kiedy?</h2>
             </div>
             <p>8 sierpnia 2026</p>
-          </div>
-
+          </a>        
+        
           <div class="card reveal-item">
             <div class="card-header">
               <span class="icon">
@@ -733,7 +745,7 @@
             <p>16:00</p>
           </div>
 
-          <div class="card reveal-item">
+          <a href="https://mazurskiosrodekszych.pl" class="card reveal-item card-link" target="_blank" rel="noopener noreferrer">
             <div class="card-header">
               <span class="icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -744,9 +756,9 @@
               <h2>Gdzie?</h2>
             </div>
             <p>Ośrodek Szych w Boguszach</p>
-          </div>
+          </a>
 
-          <div class="card reveal-item">
+          <a href="https://maps.app.goo.gl/L9RDMQ1pjVVEoNLE9" class="card reveal-item card-link" target="_blank" rel="noopener noreferrer">
             <div class="card-header">
               <span class="icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -757,6 +769,8 @@
               <h2>Jak dojechać?</h2>
             </div>
             <p>Szczegóły dojazdu znajdziecie tutaj.</p>
+          </a>
+          
           </div>
         </div>
       </div>
@@ -767,7 +781,7 @@
     <div class="section-content guests-content">
       <div class="guests-wrap">
 
-        <div class="rsvp-card reveal-item show-card">
+        <a href="https://forms.office.com/r/K6iQ3Lp1F9" class="rsvp-card rsvp-card-link reveal-item show-card" target="_blank" rel="noopener noreferrer">
           <div class="card-header card-header-center">
             <span class="icon">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -777,8 +791,8 @@
             </span>
             <h2>Czy będziesz z nami?</h2>
           </div>
-          <p> Daj nam znać klikając tutaj --></p>
-        </div>
+          <p>Daj nam znać klikając tutaj --></p>
+        </a>
 
         <div class="guests-grid">
           <div class="card reveal-item">
@@ -811,7 +825,7 @@
             <p>W niedzielę zapraszamy na wspólny obiad o 12:00.</p>
           </div>
 
-          <div class="card reveal-item">
+          <a href="mailto:gpswboguszach@gmail.com" class="card reveal-item card-link">
             <div class="card-header">
               <span class="icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -821,8 +835,8 @@
               </span>
               <h2>Kontakt</h2>
             </div>
-            <p>Jeśli masz pytania — napisz do nas tutaj.</p>
-          </div>
+            <p>Jeśli masz pytania — napisz do nas klikając tutaj.</p>
+          </a>
 
           <div class="card reveal-item">
             <div class="card-header">
