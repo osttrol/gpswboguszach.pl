@@ -1,13 +1,15 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Ula i Daniel//Ślub//PL
+PRODID:-//gpswboguszach.pl//Slub Uli i Daniela//PL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
 BEGIN:VEVENT
-UID:slub-ula-daniel-20260808@gpswboguszach.pl
+UID:slub-ula-daniel-20260808
 DTSTAMP:20260410T120000Z
-DTSTART:20260808T140000Z
-DTEND:20260808T235900Z
-SUMMARY:Ślub Uli i Daniela
-LOCATION:Ośrodek Szych\, Bogusze\, Polska
-DESCRIPTION:Zapraszamy na nasz ślub!
+DTSTART;TZID=Europe/Warsaw:20260808T160000
+DTEND;TZID=Europe/Warsaw:20260808T235900
+SUMMARY:Slub Uli i Daniela
+LOCATION:Osrodek Szych\, Bogusze\, Polska
+DESCRIPTION:Zapraszamy na nasz slub!
 END:VEVENT
 END:VCALENDAR
